@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Alternatives to Childbirth | Fertility Treatments, Surrogacy, Adoption | MCN Review</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        .transition-all { transition: all 0.3s ease; }
+        .recall-mode .reveal-text {
+            background-color: #cbd5e1;
+            color: transparent;
+            border-radius: 0.375rem;
+            padding: 0 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+            box-shadow: inset 0 0 0 1px #94a3b8;
+        }
+        .recall-mode .reveal-text:hover,
+        .recall-mode .reveal-text.revealed {
+            background-color: #bfdbfe;
+            color: #1e293b;
+            box-shadow: none;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #1e40af; border-radius: 8px; }
+        .content-section { animation: fade 0.3s ease; }
+        @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .quiz-feedback-correct { background-color: #dcfce7; border-left: 4px solid #22c55e; }
+        .quiz-feedback-wrong { background-color: #fee2e2; border-left: 4px solid #ef4444; }
+        .locked-section { opacity: 0.6; cursor: not-allowed; pointer-events: none; }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: { extend: { colors: { family: { light: '#dbeafe', DEFAULT: '#1e40af', dark: '#1e3a8a' } } } }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 h-screen flex flex-col md:flex-row font-sans text-slate-800 overflow-hidden">
+
+    <!-- Mobile Header -->
+    <div class="md:hidden bg-family-dark text-white p-4 flex justify-between items-center shadow-md z-30 shrink-0">
+        <button onclick="toggleMobileMenu()" class="text-white focus:outline-none z-40">
+            <i class="fa-solid fa-bars text-2xl"></i>
+        </button>
+        <h1 class="font-bold text-lg absolute left-1/2 transform -translate-x-1/2 pointer-events-none">
+            <i class="fa-solid fa-hand-holding-heart mr-2"></i> Alternatives
+        </h1>
+        <div class="w-8"></div>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <nav id="sidebar" class="hidden md:flex flex-col w-full md:w-80 bg-white shadow-2xl h-full absolute md:relative z-30 transition-transform duration-300 shrink-0 border-r border-slate-200">
+        <div class="p-6 bg-gradient-to-br from-family-dark to-family text-white hidden md:block shrink-0">
+            <h1 class="font-black text-2xl tracking-wide"><i class="fa-solid fa-hand-holding-heart mr-2"></i> Alternatives to Childbirth</h1>
+            <p class="text-sm text-indigo-200 mt-1 font-medium">Fertility Treatments · Surrogacy · Adoption · Fostering · Child‑Free Living</p>
+        </div>
+        <div class="flex-1 overflow-y-auto py-4">
+            <ul class="space-y-1 text-sm font-medium">
+                <li><button onclick="showSection('home')" id="btn-home" class="nav-btn w-full text-left px-6 py-3 bg-family-light text-family-dark border-r-4 border-family-dark transition-colors"><i class="fa-solid fa-house w-6 nav-icon"></i><i class="fa-solid fa-lock w-6 hidden"></i> Home / Start</button></li>
+                <li><button onclick="showSection('fertility')" id="btn-fertility" class="nav-btn w-full text-left px-6 py-3 text-slate-700 hover:bg-slate-50 transition-colors locked-section"><i class="fa-solid fa-flask w-6 nav-icon hidden"></i><i class="fa-solid fa-lock w-6 text-slate-400"></i> Fertility Treatments (IVF, ICSI, IUI)</button></li>
+                <li><button onclick="showSection('art')" id="btn-art" class="nav-btn w-full text-left px-6 py-3 text-slate-700 hover:bg-slate-50 transition-colors locked-section"><i class="fa-solid fa-dna w-6 nav-icon hidden"></i><i class="fa-solid fa-lock w-6 text-slate-400"></i> Advanced ART (GIFT, ZIFT, PGD, Donor)</button></li>
+                <li><button onclick="showSection('surrogacy')" id="btn-surrogacy" class="nav-btn w-full text-left px-6 py-3 text-slate-700 hover:bg-slate-50 transition-colors locked-section"><i class="fa-solid fa-hand-holding-hand w-6 nav-icon hidden"></i><i class="fa-solid fa-lock w-6 text-slate-400"></i> Surrogacy (Traditional & Gestational)</button></li>
+                <li><button onclick="showSection('adoption')" id="btn-adoption" class="nav-btn w-full text-left px-6 py-3 text-slate-700 hover:bg-slate-50 transition-colors locked-section"><i class="fa-solid fa-baby-carriage w-6 nav-icon hidden"></i><i class="fa-solid fa-lock w-6 text-slate-400"></i> Adoption & Fostering</button></li>
+                <li><button onclick="showSection('childfree')" id="btn-childfree" class="nav-btn w-full text-left px-6 py-3 text-slate-700 hover:bg-slate-50 transition-colors locked-section"><i class="fa-solid fa-peace w-6 nav-icon hidden"></i><i class="fa-solid fa-lock w-6 text-slate-400"></i> Child‑Free Living & Counseling</button></li>
+                <li><button onclick="showSection('mnemonics')" id="btn-mnemonics" class="nav-btn w-full text-left px-6 py-3 text-slate-700 hover:bg-slate-50 transition-colors border-t border-slate-200 mt-2 locked-section"><i class="fa-solid fa-brain w-6 text-family nav-icon hidden"></i><i class="fa-solid fa-lock w-6 text-slate-400"></i> Mnemonics & Summary</button></li>
+                <li><button onclick="showSection('final_quiz_sec')" id="btn-final_quiz_sec" class="nav-btn w-full text-left px-6 py-3 text-slate-700 hover:bg-slate-50 transition-colors locked-section"><i class="fa-solid fa-graduation-cap w-6 text-amber-500 nav-icon hidden"></i><i class="fa-solid fa-lock w-6 text-slate-400"></i> Final 50‑Item Exam</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="flex-1 h-full overflow-y-auto bg-slate-100 relative w-full">
+        <div class="fixed top-16 md:top-4 right-4 md:right-8 z-40 flex items-center bg-white/90 backdrop-blur px-4 py-3 rounded-full shadow-lg border border-slate-200 cursor-pointer hover:bg-slate-50 transition-colors" onclick="toggleRecallMode()">
+            <span class="mr-3 text-sm font-bold text-slate-700 hidden md:inline"><i class="fa-solid fa-brain text-family mr-1"></i> Active Recall</span>
+            <button id="recall-toggle" class="w-12 h-6 bg-slate-300 rounded-full relative transition-colors duration-300 focus:outline-none shadow-inner pointer-events-none">
+                <div id="recall-knob" class="w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-transform duration-300 shadow"></div>
+            </button>
+        </div>
+
+        <div class="p-4 md:p-8 max-w-6xl mx-auto pb-32">
+            <!-- HOME SECTION -->
+            <section id="home" class="content-section flex flex-col items-center justify-center min-h-[80vh] text-center block">
+                <div class="bg-gradient-to-br from-slate-800 to-family-dark text-white rounded-3xl shadow-2xl p-10 md:p-16 w-full relative overflow-hidden">
+                    <div class="absolute top-0 right-0 -mt-10 -mr-10 text-white opacity-5 pointer-events-none"><i class="fa-solid fa-hand-holding-heart text-[20rem]"></i></div>
+                    <div class="relative z-10">
+                        <div class="bg-white/10 backdrop-blur-sm inline-block p-4 rounded-full text-indigo-300 mb-6 shadow-sm border border-white/20">
+                            <i class="fa-solid fa-heart-circle-plus text-5xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-300 mb-2 uppercase tracking-widest">Maternal & Child Health Nursing</h3>
+                        <h1 class="text-4xl md:text-6xl font-black text-white mb-6 leading-tight drop-shadow-md">Alternatives to Childbirth</h1>
+                        <div class="bg-white/10 backdrop-blur inline-block px-6 py-3 rounded-full mb-10 border border-white/20">
+                            <p class="text-lg text-white font-medium">Fertility Treatments · Surrogacy · Adoption · Fostering · Child‑Free Living</p>
+                        </div>
+                        <button onclick="unlockFirstSection()" class="bg-slate-600 hover:bg-slate-500 text-white font-black py-4 px-10 rounded-full shadow-xl transition-transform hover:scale-105 text-lg flex items-center mx-auto focus:outline-none">
+                            Begin Module <i class="fa-solid fa-arrow-right ml-3"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 1. FERTILITY TREATMENTS -->
+            <section id="fertility" class="content-section hidden">
+                <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                    <h2 class="text-3xl font-black text-slate-800 mb-4 border-b-2 border-family pb-3"><i class="fa-solid fa-flask text-family mr-4"></i> Fertility Treatments (IVF, ICSI, IUI)</h2>
+                    <div class="grid md:grid-cols-2 gap-5">
+                        <div class="bg-slate-50 p-4 rounded-xl"><strong>🧬 In Vitro Fertilization (IVF)</strong><br><span class="reveal-text">Eggs retrieved after ovarian stimulation, fertilized in lab, embryos transferred to uterus. 5 steps: ovarian stimulation → egg retrieval → fertilization → embryo culture → transfer. Success: 40–50% under 35, declining with age.</span><br><span class="text-xs text-slate-500">Source: UCSF, MedlinePlus[reference:0][reference:1]</span></div>
+                        <div class="bg-slate-50 p-4 rounded-xl"><strong>🔬 Intracytoplasmic Sperm Injection (ICSI)</strong><br><span class="reveal-text">Single sperm injected directly into egg cytoplasm. Used for severe male factor infertility or failed IVF fertilization. Embryo then transferred.</span><br><span class="text-xs text-slate-500">Source: Penn Medicine[reference:2]</span></div>
+                        <div class="bg-slate-50 p-4 rounded-xl"><strong>🫧 Intrauterine Insemination (IUI)</strong><br><span class="reveal-text">Washed sperm placed directly into uterus near ovulation. Less invasive, lower success (~10‑20% per cycle). Often first‑line for unexplained infertility, mild male factor.</span></div>
+                        <div class="bg-slate-50 p-4 rounded-xl"><strong>📊 IVF Success Rates by Age</strong><br><span class="reveal-text">Under 35: 40–50%; 35–37: 30–40%; 38–40: 20–30%; Over 40: 10–20% per cycle. Donor eggs achieve 50–60%+.</span><br><span class="text-xs text-slate-500">Source: Fertility Philippines, Ovu[reference:3][reference:4]</span></div>
+                    </div>
+                    <div class="bg-blue-50 p-3 rounded-lg mt-4"><i class="fa-regular fa-lightbulb"></i> <strong>Nursing role:</strong> <span class="reveal-text">Educate about medication side effects, manage OHSS risk, provide emotional support during cycles.</span></div>
+                    <button onclick="openQuiz('fertility')" class="mt-6 w-full bg-slate-800 text-white font-black py-3 rounded-xl">Take Quiz → Unlock Next</button>
+                </div>
+            </section>
+
+            <!-- 2. ADVANCED ART -->
+            <section id="art" class="content-section hidden">
+                <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                    <h2 class="text-3xl font-black text-slate-800 mb-4 border-b-2 border-family pb-3"><i class="fa-solid fa-dna text-family mr-4"></i> Advanced ART (GIFT, ZIFT, PGD, Donor)</h2>
+                    <div class="grid md:grid-cols-2 gap-5">
+                        <div><strong>🧬 GIFT (Gamete Intrafallopian Transfer)</strong><br><span class="reveal-text">Eggs + sperm placed into fallopian tube via laparoscopy. Fertilization occurs in vivo. Pregnancy rate ~25–30% per cycle.</span><br><span class="text-xs text-slate-500">Source: DeepDyve, PubMed[reference:5]</span></div>
+                        <div><strong>🔬 ZIFT (Zygote Intrafallopian Transfer)</strong><br><span class="reveal-text">Eggs fertilized in lab (IVF), then zygote transferred to tube. Combines IVF and tubal transfer; allows confirmation of fertilization before transfer.</span><br><span class="text-xs text-slate-500">Source: Healthwise[reference:6]</span></div>
+                        <div><strong>🧬 PGD (Preimplantation Genetic Diagnosis)</strong><br><span class="reveal-text">Embryo biopsy before transfer to screen for monogenic disorders, aneuploidy, or structural rearrangements. Raises ethical considerations (eugenics, embryo selection).</span><br><span class="text-xs text-slate-500">Source: ASRM, Bioethics Observatory[reference:7][reference:8]</span></div>
+                        <div><strong>💝 Donor Insemination / Egg / Embryo Donation</strong><br><span class="reveal-text">Donor sperm (AID) for male factor or same‑sex couples. Donor eggs for advanced age or ovarian failure (success 50–60%). Donated embryos (embryo adoption) from surplus IVF cycles, pregnancy rate ~49% per transfer.</span><br><span class="text-xs text-slate-500">Source: Invitra[reference:9], Adoptive Families[reference:10]</span></div>
+                    </div>
+                    <div class="bg-amber-50 p-3 rounded-lg mt-4"><i class="fa-regular fa-message"></i> <strong>Note:</strong> <span class="reveal-text">In the Philippines, egg/sperm/embryo donation, PGT, and sex selection are not offered in most clinics; surrogacy and donor gametes face legal and ethical restrictions.</span><br><span class="text-xs text-slate-500">Source: Ovu Philippines[reference:11]</span></div>
+                    <button onclick="openQuiz('art')" class="mt-6 w-full bg-slate-800 text-white font-black py-3 rounded-xl">Take Quiz → Unlock Next</button>
+                </div>
+            </section>
+
+            <!-- 3. SURROGACY -->
+            <section id="surrogacy" class="content-section hidden">
+                <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                    <h2 class="text-3xl font-black text-slate-800 mb-4 border-b-2 border-family pb-3"><i class="fa-solid fa-hand-holding-hand text-family mr-4"></i> Surrogacy (Traditional & Gestational)</h2>
+                    <div class="grid md:grid-cols-2 gap-5">
+                        <div><strong>🤰 Traditional Surrogacy</strong><br><span class="reveal-text">Surrogate uses her own egg (genetic mother). Conception via IUI with intended father's or donor sperm. Greater legal complexity, higher ethical concerns (genetic tie).</span><br><span class="text-xs text-slate-500">Source: FIGO, Hatch[reference:12][reference:13]</span></div>
+                        <div><strong>👶 Gestational Surrogacy</strong><br><span class="reveal-text">Embryo created via IVF using intended parents' or donor gametes, transferred to surrogate (no genetic relation). Preferred method; clearer legal parentage.</span><br><span class="text-xs text-slate-500">Source: PMC, Hatch[reference:14]</span></div>
+                    </div>
+                    <ul class="list-disc pl-6 space-y-2 mt-3">
+                        <li><strong>Legal considerations:</strong> <span class="reveal-text">Gestational surrogacy generally favored; traditional surrogacy may lead to parental disputes. Some countries (France, Germany) prohibit surrogacy; others (US, UK) regulate.</span><br><span class="text-xs text-slate-500">Source: FIGO, ScienceDirect[reference:15]</span></li>
+                        <li><strong>Nursing role:</strong> <span class="reveal-text">Provide non‑judgmental care, ensure informed consent, support all parties emotionally, and coordinate mental health screening.</span></li>
+                    </ul>
+                    <button onclick="openQuiz('surrogacy')" class="mt-6 w-full bg-slate-800 text-white font-black py-3 rounded-xl">Take Quiz → Unlock Next</button>
+                </div>
+            </section>
+
+            <!-- 4. ADOPTION & FOSTERING -->
+            <section id="adoption" class="content-section hidden">
+                <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                    <h2 class="text-3xl font-black text-slate-800 mb-4 border-b-2 border-family pb-3"><i class="fa-solid fa-baby-carriage text-family mr-4"></i> Adoption & Fostering</h2>
+                    <div class="grid md:grid-cols-2 gap-5">
+                        <div><strong>📜 Domestic Adoption (Philippines)</strong><br><span class="reveal-text">Types: agency adoption, family/relative adoption (within 4th degree). Requirements: Filipino citizen ≥25, full civil capacity, income, 16‑year age gap (waivable for biological parents). Child must be <18 and declared available for adoption.</span><br><span class="text-xs text-slate-500">Source: DSWD, RA 8552[reference:16][reference:17]</span></div>
+                        <div><strong>🌍 Intercountry Adoption</strong><br><span class="reveal-text">Last resort when domestic adoption not possible. Governed by Hague Convention; requires adoption authority clearance.</span><br><span class="text-xs text-slate-500">Source: DSWD[reference:18]</span></div>
+                        <div><strong>🤝 Foster Care</strong><br><span class="reveal-text">Temporary placement of child in family home. Foster parents at least 16 years older than child, legal age, stable relationship, undergo training and licensing.</span><br><span class="text-xs text-slate-500">Source: DSWD, NACC[reference:19]</span></div>
+                        <div><strong>❤️ Nursing Role in Adoption/Fostering</strong><br><span class="reveal-text">Assess readiness of adoptive parents, provide education on child’s history and attachment, facilitate bonding, offer post‑placement support and referrals.</span></div>
+                    </div>
+                    <div class="bg-green-50 p-3 rounded-lg mt-4"><i class="fa-regular fa-heart"></i> <strong>Key principle:</strong> <span class="reveal-text">“Preserving the child’s identity and culture” – domestic adoption preferred; intercountry as last resort.</span></div>
+                    <button onclick="openQuiz('adoption')" class="mt-6 w-full bg-slate-800 text-white font-black py-3 rounded-xl">Take Quiz → Unlock Next</button>
+                </div>
+            </section>
+
+            <!-- 5. CHILD‑FREE LIVING & COUNSELING -->
+            <section id="childfree" class="content-section hidden">
+                <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                    <h2 class="text-3xl font-black text-slate-800 mb-4 border-b-2 border-family pb-3"><i class="fa-solid fa-peace text-family mr-4"></i> Child‑Free Living & Counseling</h2>
+                    <p><strong>Voluntary childlessness</strong> – the intentional decision not to have children despite biological capacity. <strong>Child‑free</strong> individuals identify this choice as central to their identity.</p>
+                    <div class="grid md:grid-cols-2 gap-5 mt-3">
+                        <div class="bg-slate-50 p-4 rounded-xl"><strong>🌱 Reasons</strong><br><span class="reveal-text">Career aspirations, financial freedom, personal autonomy, environmental concerns, not seeing motherhood as appealing.</span><br><span class="text-xs text-slate-500">Source: AJOL, Nature[reference:20][reference:21]</span></div>
+                        <div class="bg-slate-50 p-4 rounded-xl"><strong>💪 Outcomes</strong><br><span class="reveal-text">Higher marital satisfaction, financial stability, focus on personal growth, lower stress; may face social stigma (“selfish” label).</span><br><span class="text-xs text-slate-500">Source: Migration Letters[reference:22]</span></div>
+                    </div>
+                    <div class="bg-amber-50 p-3 rounded-lg mt-4"><i class="fa-regular fa-clipboard"></i> <strong>Nursing considerations:</strong> <span class="reveal-text">Respect patient autonomy, avoid assumptions about fertility desires, provide unbiased counseling, and explore all family‑building options (including child‑free) without pressure.</span></div>
+                    <button onclick="openQuiz('childfree')" class="mt-6 w-full bg-slate-800 text-white font-black py-3 rounded-xl">Take Quiz → Unlock Next</button>
+                </div>
+            </section>
+
+            <!-- 6. MNEMONICS & SUMMARY -->
+            <section id="mnemonics" class="content-section hidden">
+                <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+                    <h2 class="text-3xl font-black text-slate-800 mb-4 border-b-2 border-family pb-3"><i class="fa-solid fa-brain text-family mr-4"></i> Mnemonics & Summary</h2>
+                    <div class="grid md:grid-cols-2 gap-5">
+                        <div class="bg-indigo-50 p-4 rounded-xl"><strong>🧠 IVF steps – “S.E.F.E.T.”</strong><br><span class="reveal-text">Stimulation, Egg retrieval, Fertilization, Embryo culture, Transfer.</span></div>
+                        <div class="bg-indigo-50 p-4 rounded-xl"><strong>📌 Surrogacy types – “T.G.”</strong><br><span class="reveal-text">Traditional (genetic link), Gestational (no genetic link).</span></div>
+                        <div class="bg-indigo-50 p-4 rounded-xl"><strong>📖 Adoption PH – “A.R.E.”</strong><br><span class="reveal-text">Agency adoption, Relative adoption, (intercountry as last resort).</span></div>
+                        <div class="bg-indigo-50 p-4 rounded-xl"><strong>🧬 ART mnemonic – “GIFT, ZIFT, PGD, ICSI”</strong><br><span class="reveal-text">Gamete intrafallopian, Zygote intrafallopian, Preimplantation genetic diagnosis, Intracytoplasmic sperm injection.</span></div>
+                    </div>
+                    <div class="overflow-x-auto mt-4">
+                        <table class="w-full text-sm border-collapse border">
+                            <thead class="bg-family text-white"><tr><th class="p-2">Option</th><th class="p-2">Key Feature</th><th class="p-2">Success / Requirements</th></tr></thead>
+                            <tbody>
+                                <tr><td class="border p-2">IVF</td><td class="border reveal-text">Lab fertilization</td><td class="border reveal-text">40–50% (<35)</td></tr>
+                                <tr class="bg-slate-50"><td class="border p-2">ICSI</td><td class="border reveal-text">Single sperm injection</td><td class="border reveal-text">Severe male factor</td></tr>
+                                <tr><td class="border p-2">Surrogacy (gestational)</td><td class="border reveal-text">No genetic link</td><td class="border reveal-text">Legal clarity</td></tr>
+                                <tr class="bg-slate-50"><td class="border p-2">Adoption (PH)</td><td class="border reveal-text">Domestic, agency/relative</td><td class="border reveal-text">Age ≥25, 16‑year gap</td></tr>
+                                <tr><td class="border p-2">Foster care</td><td class="border reveal-text">Temporary, family‑based</td><td class="border reveal-text">≥16 years older than child</td></tr>
+                                <tr class="bg-slate-50"><td class="border p-2">Child‑free</td><td class="border reveal-text">Intentional no children</td><td class="border reveal-text">Autonomy, personal values</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <button onclick="openQuiz('mnemonics')" class="mt-6 w-full bg-slate-800 text-white font-black py-3 rounded-xl">Take Quiz → Unlock Final Exam</button>
+                </div>
+            </section>
+
+            <!-- FINAL EXAM SECTION -->
+            <section id="final_quiz_sec" class="content-section hidden">
+                <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 text-center min-h-[60vh] flex flex-col justify-center items-center">
+                    <i class="fa-solid fa-graduation-cap text-8xl text-amber-500 mb-6"></i>
+                    <h2 class="text-4xl font-black text-slate-800 mb-4">Final 50‑Item Exam</h2>
+                    <p class="text-lg text-slate-600 mb-8 max-w-2xl">Covers all alternatives: fertility treatments, ART, surrogacy, adoption, fostering, child‑free living, and mnemonics. Score ≥75% to pass.</p>
+                    <button onclick="openQuiz('final_quiz')" class="w-full max-w-md bg-slate-800 text-white font-black py-4 rounded-xl shadow-md text-xl">Start Final Exam</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- QUIZ MODAL -->
+    <div id="quiz-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center bg-slate-900/80 backdrop-blur-sm p-4">
+        <div class="bg-white w-full max-w-3xl rounded-2xl shadow-2xl p-6 md:p-8 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeQuiz()" class="absolute top-4 right-4 text-slate-400 hover:text-red-500"><i class="fa-solid fa-xmark text-2xl"></i></button>
+            <h2 id="quiz-title" class="text-3xl font-black text-slate-800 mb-2"></h2>
+            <div id="quiz-questions-container" class="space-y-4 mt-4"></div>
+            <button id="quiz-submit-btn" onclick="submitQuiz()" class="mt-8 w-full bg-family text-white font-bold py-4 rounded-xl shadow-lg">Submit Answers</button>
+            <div id="quiz-result-container" class="hidden mt-6 p-4 rounded-xl bg-slate-100"></div>
+        </div>
+    </div>
+
+    <script>
+        let unlockedSections = ['home'];
+        // QUIZZES (10 questions each)
+        const quizzes = {
+            fertility: { title: "Fertility Treatments (IVF, ICSI, IUI)", next: "art", questions: [
+                { q: "The 5 steps of IVF are:", options: ["Stimulation, Egg retrieval, Fertilization, Embryo culture, Transfer", "Sperm wash, IUI, ICSI, GIFT, ZIFT", "Ovarian suppression, Hysteroscopy, Laparoscopy, Transfer", "None"], ans: 0 },
+                { q: "Intracytoplasmic sperm injection (ICSI) is indicated for:", options: ["Mild male factor", "Severe male factor infertility", "Unexplained infertility", "Tubal blockage"], ans: 1 },
+                { q: "IVF success rate for women under 35 is approximately:", options: ["10-20%", "30-40%", "40-50%", "60-70%"], ans: 2 },
+                { q: "In Intrauterine Insemination (IUI), the sperm is placed:", options: ["In the vagina", "In the cervix", "Directly into the uterus", "Into the fallopian tube"], ans: 2 },
+                { q: "Ovarian hyperstimulation syndrome (OHSS) is a risk of:", options: ["IUI", "Ovulation induction for IVF", "Embryo transfer only", "PGD"], ans: 1 },
+                { q: "Donor egg IVF success rates typically exceed:", options: ["20%", "35%", "50%", "70%"], ans: 2 },
+                { q: "ICSI involves injecting a sperm directly into:", options: ["The zona pellucida", "The egg cytoplasm", "The perivitelline space", "The polar body"], ans: 1 },
+                { q: "Which of the following is a first‑line treatment for unexplained infertility with good prognosis?", options: ["IVF", "ICSI", "IUI with stimulation", "GIFT"], ans: 2 },
+                { q: "Embryo transfer is typically performed how many days after fertilization?", options: ["1-2 days", "2-5 days", "6-7 days", "10-14 days"], ans: 1 },
+                { q: "A woman aged 40 using her own eggs has an IVF success rate of approximately:", options: ["40-50%", "30-40%", "10-20%", "<5%"], ans: 2 }
+            ]},
+            art: { title: "Advanced ART (GIFT, ZIFT, PGD, Donor)", next: "surrogacy", questions: [
+                { q: "GIFT (Gamete Intrafallopian Transfer) involves placing:", options: ["Fertilized zygote into tube", "Eggs + sperm into tube", "Embryo into uterus", "Sperm into uterus"], ans: 1 },
+                { q: "In ZIFT, fertilization occurs:", options: ["In the fallopian tube", "In the uterus", "In the lab (IVF)", "In the peritoneal cavity"], ans: 2 },
+                { q: "PGD (Preimplantation Genetic Diagnosis) is used to screen embryos for:", options: ["Sex only", "Chromosomal aneuploidy and monogenic disorders", "Infectious diseases", "Maternal antibodies"], ans: 1 },
+                { q: "Embryo donation (embryo adoption) involves:", options: ["Donating embryos to research only", "Transferring surplus frozen embryos from another couple", "Creating embryos from donor egg and donor sperm", "Only embryos from the same clinic"], ans: 1 },
+                { q: "Artificial insemination by donor (AID) is indicated for:", options: ["Ovarian failure", "Severe male factor infertility or same‑sex couples", "Tubal blockage", "Uterine anomalies"], ans: 1 },
+                { q: "Donor egg IVF success rate per cycle is approximately:", options: ["20-30%", "40-50%", "50-60%", "70-80%"], ans: 2 },
+                { q: "Which ART technique requires laparoscopy for gamete placement?", options: ["IVF", "ICSI", "GIFT", "IUI"], ans: 2 },
+                { q: "Ethical concerns regarding PGD include:", options: ["Risk of OHSS", "Eugenics and embryo selection", "High cost only", "Legal restrictions only"], ans: 1 },
+                { q: "A couple with a known BRCA mutation may consider:", options: ["IUI", "IVF with PGD", "GIFT", "Donor insemination"], ans: 1 },
+                { q: "In the Philippines, which of the following is generally NOT offered in fertility clinics?", options: ["IUI", "IVF", "Egg donation and PGT", "ICSI"], ans: 2 }
+            ]},
+            surrogacy: { title: "Surrogacy (Traditional & Gestational)", next: "adoption", questions: [
+                { q: "In traditional surrogacy, the surrogate:", options: ["Is not genetically related to the child", "Provides her own egg (genetic mother)", "Only carries the pregnancy", "Is always anonymous"], ans: 1 },
+                { q: "Gestational surrogacy involves:", options: ["Use of surrogate's egg", "IVF with intended parents' or donor gametes", "Only intended father's sperm", "No medical procedures"], ans: 1 },
+                { q: "The main legal advantage of gestational surrogacy over traditional is:", options: ["Lower cost", "Clearer legal parentage", "No need for IVF", "No medical risks"], ans: 1 },
+                { q: "Which type of surrogacy raises fewer ethical concerns regarding genetic ties?", options: ["Traditional", "Gestational", "Both equally", "Neither"], ans: 1 },
+                { q: "A prospective surrogate mother should undergo:", options: ["Only physical exam", "Medical and psychological screening", "No screening", "Only legal contract"], ans: 1 },
+                { q: "In the Philippines, surrogacy remains:", options: ["Fully legal and regulated", "Legally ambiguous with restrictions", "Widely practiced and subsidized", "Explicitly prohibited"], ans: 1 },
+                { q: "Traditional surrogacy conception typically uses:", options: ["IVF", "IUI or IVF", "Only IUI", "Only ICSI"], ans: 1 },
+                { q: "The intended parents in a gestational surrogacy are:", options: ["Always genetically related", "May use donor eggs/sperm", "Never genetically related", "Only the father"], ans: 1 },
+                { q: "Which of the following is a risk for the surrogate mother?", options: ["Medical complications of pregnancy", "Emotional distress", "Legal disputes", "All of the above"], ans: 3 },
+                { q: "The FIGO position statement on surrogacy emphasizes:", options: ["Mandatory commercial surrogacy", "Ethical considerations, informed consent, and protection of all parties", "Only medical aspects", "Only legal aspects"], ans: 1 }
+            ]},
+            adoption: { title: "Adoption & Fostering", next: "childfree", questions: [
+                { q: "In the Philippines, domestic adoption is preferred over intercountry adoption because:", options: ["It is cheaper", "Preserves child's identity and culture", "It is faster", "No legal requirements"], ans: 1 },
+                { q: "The minimum age to adopt in the Philippines is:", options: ["18 years", "21 years", "25 years", "30 years"], ans: 2 },
+                { q: "A foster parent must be at least how many years older than the child?", options: ["10 years", "12 years", "16 years", "20 years"], ans: 2 },
+                { q: "Foster care is best described as:", options: ["Permanent placement", "Temporary family‑based placement", "Institutional care", "Adoption without legal process"], ans: 1 },
+                { q: "Relative adoption within the 4th degree of consanguinity is also known as:", options: ["Agency adoption", "Family adoption", "Intercountry adoption", "Foster adoption"], ans: 1 },
+                { q: "The written consent of a child aged ___ is required for adoption in the Philippines.", options: ["7 years", "10 years", "12 years", "15 years"], ans: 1 },
+                { q: "Prospective foster parents must complete:", options: ["Only an application", "Home study, training, and licensing", "Only medical exam", "Only interview"], ans: 1 },
+                { q: "A child who is legally free for adoption must be:", options: ["Under 21", "Under 18", "Under 16", "Any age"], ans: 1 },
+                { q: "Which of the following is a nursing role in adoption?", options: ["Facilitate bonding, assess readiness, provide post‑placement support", "Perform legal adoption decree", "Only collect fees", "Only provide medical care"], ans: 0 },
+                { q: "Intercountry adoption is considered as:", options: ["First choice", "Last resort when domestic adoption is not possible", "Only for special needs children", "Always prohibited"], ans: 1 }
+            ]},
+            childfree: { title: "Child‑Free Living & Counseling", next: "mnemonics", questions: [
+                { q: "Voluntary childlessness is defined as:", options: ["Inability to conceive", "Intentional decision not to have children despite ability", "Postponement of childbearing", "Medical sterility"], ans: 1 },
+                { q: "Common reasons for choosing child‑free living include:", options: ["Career goals, financial freedom, personal autonomy", "Infertility only", "Religious obligations", "Lack of partner"], ans: 0 },
+                { q: "Studies show child‑free couples often report:", options: ["Higher marital satisfaction and financial stability", "Higher divorce rates", "More depression", "Lower quality of life"], ans: 0 },
+                { q: "Which of the following is NOT a nursing consideration when discussing child‑free living?", options: ["Respecting patient autonomy", "Assuming everyone wants children", "Exploring all family‑building options", "Avoiding judgment"], ans: 1 },
+                { q: "The term ‘child‑free’ indicates:", options: ["Involuntary childlessness", "Identity choice central to the person", "Temporary decision", "Only for married couples"], ans: 1 },
+                { q: "A growing trend in the Philippines shows more women choosing child‑free due to:", options: ["Economic anxiety, desire for freedom", "Mandatory policies", "Religious mandates", "Low education"], ans: 0 },
+                { q: "Nurses should provide preconception counseling that:", options: ["Only promotes childbearing", "Includes unbiased discussion of all options, including child‑free", "Discourages fertility treatments", "Mandates adoption"], ans: 1 },
+                { q: "Voluntary childlessness is most likely to be solidified by:", options: ["Early teens", "Mid‑twenties", "After menopause", "Late 30s"], ans: 1 },
+                { q: "A patient who chooses to remain child‑free may face social stigma such as:", options: ["Being labeled ‘selfish’", "Being praised", "No social reactions", "Legal penalties"], ans: 0 },
+                { q: "The nurse’s primary ethical responsibility regarding child‑free decisions is:", options: ["Convince the patient to have children", "Respect patient's autonomy and provide non‑judgmental care", "Refer to psychiatry", "Ignore the patient's choice"], ans: 1 }
+            ]},
+            mnemonics: { title: "Mnemonics & Summary", next: "final_quiz_sec", questions: [
+                { q: "The mnemonic for IVF steps is:", options: ["S.E.F.E.T.", "G.I.F.T.", "Z.I.F.T.", "P.G.D."], ans: 0 },
+                { q: "In the mnemonic ‘S.E.F.E.T.’, the first ‘E’ stands for:", options: ["Egg retrieval", "Embryo culture", "Embryo transfer", "Estrogen"], ans: 0 },
+                { q: "The mnemonic for surrogacy types is:", options: ["T.G.", "I.V.F.", "G.I.F.T.", "A.R.T."], ans: 0 },
+                { q: "In ‘T.G.’ for surrogacy, ‘T’ stands for:", options: ["Traditional surrogacy", "Tubal transfer", "Testicular sperm", "Trimester"], ans: 0 },
+                { q: "The mnemonic for adoption in the Philippines is:", options: ["A.R.E.", "S.E.F.E.T.", "G.I.F.T.", "P.G.D."], ans: 0 },
+                { q: "In ‘A.R.E.’, ‘R’ stands for:", options: ["Relative adoption", "Rescue", "Reproductive", "Residence"], ans: 0 },
+                { q: "Which mnemonic helps recall advanced ART techniques?", options: ["GIFT, ZIFT, PGD, ICSI", "S.E.F.E.T.", "A.R.E.", "T.G."], ans: 0 },
+                { q: "The mnemonic for child‑free living is not listed, but the key concept is:", options: ["Autonomy and respect", "Compulsory parenthood", "Only financial reasons", "Religious duty"], ans: 0 },
+                { q: "PGD stands for:", options: ["Preimplantation Genetic Diagnosis", "Post‑Gestational Delivery", "Prenatal Growth Determination", "Progesterone"], ans: 0 },
+                { q: "The mnemonic for surrogacy types is used to differentiate:", options: ["Genetic link (traditional) vs no genetic link (gestational)", "Medical vs legal aspects", "IVF vs IUI", "Domestic vs intercountry"], ans: 0 }
+            ]}
+        };
+        // Build final 50-item exam
+        let finalQ = [];
+        for(let sec of ['fertility','art','surrogacy','adoption','childfree','mnemonics']) {
+            finalQ.push(...quizzes[sec].questions.slice(0,8));
+        }
+        while(finalQ.length < 50) finalQ.push({ q: "The most important nursing role when discussing alternatives to childbirth is:", options: ["Promote only IVF", "Provide unbiased information and respect patient autonomy", "Discourage surrogacy", "Encourage adoption for all"], ans: 1 });
+        quizzes.final_quiz = { title: "Final 50‑Item Exam: Alternatives to Childbirth", next: null, questions: finalQ };
+
+        let currentQuiz = null;
+
+        function unlockFirstSection() { if(!unlockedSections.includes('fertility')) { unlockedSections.push('fertility'); updateSidebarUI(); } showSection('fertility'); }
+        function showSection(sectionId) {
+            if (!unlockedSections.includes(sectionId) && sectionId !== 'home') { alert("Complete the Active Recall Quiz at the bottom of the previous section to unlock."); return; }
+            document.querySelectorAll('.content-section').forEach(el => el.classList.add('hidden'));
+            document.getElementById(sectionId)?.classList.remove('hidden');
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('bg-family-light','text-family-dark','border-r-4','border-family-dark'));
+            const activeBtn = document.getElementById('btn-'+sectionId);
+            if(activeBtn) activeBtn.classList.add('bg-family-light','text-family-dark','border-r-4','border-family-dark');
+            if(window.innerWidth < 768) document.getElementById('sidebar').classList.add('hidden');
+        }
+        function updateSidebarUI() {
+            const sections = ['home','fertility','art','surrogacy','adoption','childfree','mnemonics','final_quiz_sec'];
+            sections.forEach(sec => {
+                const btn = document.getElementById('btn-'+sec);
+                if(!btn) return;
+                const lock = btn.querySelector('.fa-lock'), icon = btn.querySelector('.nav-icon');
+                if(unlockedSections.includes(sec) || sec==='home') { btn.classList.remove('locked-section'); if(lock) lock.classList.add('hidden'); if(icon) icon.classList.remove('hidden'); }
+                else { btn.classList.add('locked-section'); if(lock) lock.classList.remove('hidden'); if(icon) icon.classList.add('hidden'); }
+            });
+        }
+        function openQuiz(sectionId) { currentQuiz = sectionId; const qd = quizzes[sectionId]; if(!qd) return; document.getElementById('quiz-title').innerHTML = qd.title; const container = document.getElementById('quiz-questions-container'); container.innerHTML = ''; qd.questions.forEach((q, idx) => { let html = `<div class="bg-slate-50 p-4 rounded-xl mb-4"><p class="font-bold mb-3">${idx+1}. ${q.q}</p><div class="space-y-2">`; q.options.forEach((opt,oi) => { html += `<label class="flex items-center space-x-3 p-2 rounded-lg hover:bg-white cursor-pointer"><input type="radio" name="q${idx}" value="${oi}" class="form-radio text-family"><span>${opt}</span></label>`; }); html += `</div><div class="feedback-${idx} text-sm mt-2 hidden"></div></div>`; container.innerHTML += html; }); document.getElementById('quiz-submit-btn').classList.remove('hidden'); document.getElementById('quiz-result-container').classList.add('hidden'); document.getElementById('quiz-modal').classList.remove('hidden'); }
+        function closeQuiz() { document.getElementById('quiz-modal').classList.add('hidden'); }
+        function submitQuiz() {
+            const qd = quizzes[currentQuiz];
+            if(!qd) return;
+            let score = 0;
+            for(let i=0; i<qd.questions.length; i++) {
+                const sel = document.querySelector(`input[name="q${i}"]:checked`);
+                if(sel && parseInt(sel.value)===qd.questions[i].ans) score++;
+                const fbDiv = document.querySelector(`.feedback-${i}`);
+                if(fbDiv){
+                    fbDiv.classList.remove('hidden');
+                    const correctTxt = qd.questions[i].options[qd.questions[i].ans];
+                    if(sel && parseInt(sel.value)===qd.questions[i].ans) { fbDiv.innerHTML='<span class="text-green-700">✓ Correct</span>'; fbDiv.parentElement?.classList.add('quiz-feedback-correct'); }
+                    else { const selectedTxt = sel? qd.questions[i].options[parseInt(sel.value)]:"No answer"; fbDiv.innerHTML=`<span class="text-red-700">✗ Incorrect. Correct: ${correctTxt}. You answered: ${selectedTxt}</span>`; fbDiv.parentElement?.classList.add('quiz-feedback-wrong'); }
+                }
+            }
+            let percent = (score/qd.questions.length)*100;
+            let resultDiv = document.getElementById('quiz-result-container');
+            document.getElementById('quiz-submit-btn').classList.add('hidden');
+            resultDiv.classList.remove('hidden');
+            if(percent>=75){
+                if(currentQuiz==='final_quiz'){ resultDiv.innerHTML=`<div class="text-green-600 text-4xl text-center">🎉 Excellent! Score ${score}/${qd.questions.length} (${percent}%)<br>You mastered Alternatives to Childbirth</div><button onclick="closeQuiz()" class="mt-4 bg-family text-white px-6 py-2 rounded-xl">Close</button>`; return; }
+                if(quizzes[currentQuiz].next && !unlockedSections.includes(quizzes[currentQuiz].next)) unlockedSections.push(quizzes[currentQuiz].next);
+                if(quizzes[currentQuiz].next === 'mnemonics' && !unlockedSections.includes('final_quiz_sec')) unlockedSections.push('final_quiz_sec');
+                updateSidebarUI();
+                resultDiv.innerHTML=`<div class="text-green-600 text-3xl text-center">✅ Passed! (${score}/${qd.questions.length})</div><button onclick="closeQuiz(); showSection('${quizzes[currentQuiz].next}')" class="mt-4 bg-green-600 text-white px-6 py-2 rounded-xl">Unlock Next Section</button>`;
+            } else { resultDiv.innerHTML=`<div class="text-red-600 text-3xl text-center">❌ Failed: ${score}/${qd.questions.length} (${percent}%)<br>Need 75%</div><button onclick="openQuiz('${currentQuiz}')" class="mt-4 bg-slate-600 text-white px-6 py-2 rounded-xl">Try Again</button>`; }
+        }
+        function toggleRecallMode() { const active = !document.body.classList.contains('recall-mode'); const toggle=document.getElementById('recall-toggle'),knob=document.getElementById('recall-knob'); if(active){ document.body.classList.add('recall-mode'); toggle.classList.add('bg-family-dark'); knob.classList.add('translate-x-6'); } else { document.body.classList.remove('recall-mode'); toggle.classList.remove('bg-family-dark'); knob.classList.remove('translate-x-6'); } }
+        function toggleMobileMenu() { const s=document.getElementById('sidebar'); if(s.classList.contains('hidden')) s.classList.remove('hidden','flex','absolute','h-full','z-50'); else s.classList.add('hidden'); }
+        document.addEventListener('DOMContentLoaded', () => { updateSidebarUI(); document.querySelectorAll('.reveal-text').forEach(el => el.addEventListener('click', function(){ if(document.body.classList.contains('recall-mode')) this.classList.toggle('revealed'); })); });
+    </script>
+</body>
+</html>
